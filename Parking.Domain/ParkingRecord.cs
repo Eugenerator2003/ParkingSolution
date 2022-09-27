@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Parking.Domain
 {
-    internal class ParkingRecord : ParkingObject
+    internal class ParkingRecord
     {
     }
 }

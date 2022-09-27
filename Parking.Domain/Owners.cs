@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Parking.Domain
 {
-    internal class Owners : ParkingObject
+    internal class Owners
     {
+        public int Id { get; set; }
 
+        public string Fullname { get; set; } = "";
+
+        public long PhoneNumber { get; set; }
     }
 }

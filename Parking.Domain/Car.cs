@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Parking.Domain
 {
-    internal class Car : ParkingObject
+    internal class Car
     {
+        public int Id { get; set;}
+
+        public int CarMarkId { get; set; }
+
+        public int OwnerId { get; set; }
     }
 }
