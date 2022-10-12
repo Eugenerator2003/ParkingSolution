@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Parking.Domain
 {
-    internal class Car
+    public partial class Car
     {
-        public int Id { get; set;}
+        public Car()
+        {
+            ParkingRecords = new HashSet<ParkingRecord>();
+        }
 
-        public int CarMarkId { get; set; }
+        public int Id { get; set; }
+        public string? Number { get; set; }
+        public int? CarMarkId { get; set; }
+        public int? OwnerId { get; set; }
 
-        public int OwnerId { get; set; }
+        public virtual CarMark? CarMark { get; set; }
+        public virtual Owner? Owner { get; set; }
+        public virtual ICollection<ParkingRecord> ParkingRecords { get; set; }
     }
 }

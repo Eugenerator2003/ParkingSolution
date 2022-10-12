@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{70BDECA8-94BE-4E42-B668-4D3F988706D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parking.Domain", "Parking.Domain\Parking.Domain.csproj", "{110B5B19-5F9E-4DF8-B369-4D3E25DA7AC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parking.Domain", "Parking.Domain\Parking.Domain.csproj", "{110B5B19-5F9E-4DF8-B369-4D3E25DA7AC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parking.Application", "Parling.Application\Parking.Application.csproj", "{1831E80B-B283-4186-8EE2-C1A1A315F6AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parking.Application", "Parling.Application\Parking.Application.csproj", "{1831E80B-B283-4186-8EE2-C1A1A315F6AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parking.Persistance", "Parking.Persistance\Parking.Persistance.csproj", "{4FCB9155-143C-4DA4-8BB8-B4491211F065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parking.Persistance", "Parking.Persistance\Parking.Persistance.csproj", "{4FCB9155-143C-4DA4-8BB8-B4491211F065}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parking.Web", "Parking.Web\Parking.Web.csproj", "{942E2CBE-AF32-4698-8C52-6EB8B71955AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parking.Web", "Parking.Web\Parking.Web.csproj", "{942E2CBE-AF32-4698-8C52-6EB8B71955AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

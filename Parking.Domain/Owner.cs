@@ -3,15 +3,16 @@ using System.Collections.Generic;
 
 namespace Parking.Domain
 {
-    public partial class CarMark
+    public partial class Owner
     {
-        public CarMark()
+        public Owner()
         {
             Cars = new HashSet<Car>();
         }
 
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string? Fullname { get; set; }
+        public long? PhoneNumber { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; }
     }

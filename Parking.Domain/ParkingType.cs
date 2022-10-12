@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Parking.Domain
 {
-    internal class ParkingType
+    public partial class ParkingType
     {
-        public int Id { get; set; }
+        public ParkingType()
+        {
+            PaymentTariffs = new HashSet<PaymentTariff>();
+        }
 
-        public string Name { get; set; } = "";
+        public int Id { get; set; }
+        public string? Name { get; set; }
+
+        public virtual ICollection<PaymentTariff> PaymentTariffs { get; set; }
     }
 }

@@ -3,19 +3,18 @@ using System.Collections.Generic;
 
 namespace Parking.Domain
 {
-    public partial class PaymentTariff
+    public partial class Emploeyee
     {
-        public PaymentTariff()
+        public Emploeyee()
         {
             ParkingRecords = new HashSet<ParkingRecord>();
+            WorkShifts = new HashSet<WorkShift>();
         }
 
         public int Id { get; set; }
-        public int? ParkingTypeId { get; set; }
-        public int? DaysCount { get; set; }
-        public decimal? Payment { get; set; }
+        public string? Fullname { get; set; }
 
-        public virtual ParkingType? ParkingType { get; set; }
         public virtual ICollection<ParkingRecord> ParkingRecords { get; set; }
+        public virtual ICollection<WorkShift> WorkShifts { get; set; }
     }
 }
