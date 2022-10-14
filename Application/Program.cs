@@ -72,6 +72,7 @@ public class Program
                 }
                 Console.WriteLine("Для продолжения нажмите любую клавишу");
                 Console.ReadKey();
+
                 Console.Clear();
             }
         }
