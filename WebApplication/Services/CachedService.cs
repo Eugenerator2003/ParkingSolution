@@ -40,7 +40,7 @@ namespace WebApplication.Services
             return items;
         }
 
-        public void AddItem(string cacheKey)
+        public void AddItems(string cacheKey)
         {
             IEnumerable<T> items = GetItems();
             cache.Set(cacheKey, items, new MemoryCacheEntryOptions()
