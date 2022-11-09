@@ -196,7 +196,7 @@ namespace WebApplication
 
                 var builder = new StringBuilder(
                               $"<html><head><title>Search form 1</title></head><body>" +
-                              $"<form><div><input type='submit' value='Send data'></div><br>" +
+                              $"<form><div><input type='submit' value='Save data to session'></div><br>" +
                               $"<div>Enter mark name:<br><input type='text' name={keyInput} " +
                               $"value='{context.Session.GetString(keyInput)}'></div>" +
                               $"<br><div>Select mark name:<br><select name='{keySelect}'>");
@@ -262,7 +262,7 @@ namespace WebApplication
 
                 var builder = new StringBuilder(
                               $"<html><head><title>Search form 2</title></head><body>" +
-                              $"<form><div><input type='submit' value='Send data'></div><br>" +
+                              $"<form><div><input type='submit' value='Save data to cookies'></div><br>" +
                               $"<div>Enter mark name:<br><input type='text' name={keyInput} " +
                               $"value='{context.Request.Cookies[keyInput]}'></div>" +
                               $"<br><div>Select mark name:<br><select name='{keySelect}'>");
