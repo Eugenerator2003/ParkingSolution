@@ -15,7 +15,7 @@ namespace Parking.Application
             builder.SetBasePath(Directory.GetCurrentDirectory());
             builder.AddJsonFile("appsettings.json");
             var config = builder.Build();
-            return config.GetConnectionString("SqlServer");
+            return config.GetConnectionString("DefaultConnection");
         }
     }
 }

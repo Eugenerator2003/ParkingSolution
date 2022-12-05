@@ -1,6 +1,6 @@
 ﻿using Parking.Application;
 
-namespace ParkingWebApplication.Services.DbInitializer
+namespace ParkingWebApplication.Midddleware.DbInitializer
 {
     public class DbInitializerMiddleware
     {

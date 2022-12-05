@@ -3,12 +3,10 @@ using Parking.Domain;
 using System;
 using System.Runtime.InteropServices;
 
-namespace ParkingWebApplication.Services.DbInitializer
+namespace ParkingWebApplication.Midddleware.DbInitializer
 {
     public class DbInitializer
     {
-
-        private static Random _random = new Random();
         private static string[] _firstNames = { "Иван", "Александр", "Пётр", "Андрей", "Владислав", "Мария", "Надежда",
                                                 "Светлана", "Екатерина", "Олег", "Ева", "Артём", "Павел", "Роман",
                                                 "Алина", "Анна", "София", "Иван", "Максим" };
