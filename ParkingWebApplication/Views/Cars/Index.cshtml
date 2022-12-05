@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Parking.Domain.Car>
+
+@{
+    ViewData["Title"] = "Автомобили";
+}
+
+<h1>Автомобили</h1>
+
+<p>
+    <a asp-action="Create">Создать запись об автомобиле</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Номер
+            </th>
+            <th>
+                Название марки
+            </th>
+            <th>
+                Владелец
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarMark.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.Fullname)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Yдалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
