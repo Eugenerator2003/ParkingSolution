@@ -1,0 +1,141 @@
+﻿@model ParkingRecordsViewModel
+
+@{
+    ViewData["Title"] = "Parking records";
+    SortState SortOrder = Model.SortViewModel.CurrentState;
+    string OldFieldName = Model.SortViewModel.FieldName;
+    int? CarId = Model.CarId;
+    int? OwnerId = Model.OwnerId;
+    int? ParkingTypeId = Model.ParkingTypeId;
+    bool SearchForEntryDate = Model.SearchForEntryDate;
+    bool SearchForDepartureDate = Model.SearchForDepatureDate;
+    DateTime EntryDate = Model.EntryDate.Value.Year < 2015 ? DateTime.Now : Model.EntryDate.Value;
+    DateTime DepartureDate = Model.DepartureDate.Value.Year < 2015 ? DateTime.Now : Model.DepartureDate.Value;
+}
+
+<h1>Parking records</h1>
+
+<p>
+    <a asp-action="Create">Create record about parking</a>
+</p>
+<p>
+    <a asp-action="Salary">Get earning bill</a>
+</p>
+@using (Html.BeginForm("Index", "ParkingRecords", FormMethod.Get))
+{
+    <fieldset>
+        <label>Parking</label>
+        @Html.DropDownList("ParkingTypeId", Model.ParkingTypes)
+        <label>Car</label>
+        @Html.DropDownList("CarId", Model.Cars)
+        <label>Owner</label>
+        @Html.DropDownList("OwnerId", Model.Onwers)
+        <label>Entry date:</label>
+        @Html.CheckBox("SearchForEntryDate", SearchForEntryDate)
+        @Html.EditorFor(model => model.EntryDate, new {htmlAttributes = new {@class = "datepicker", @value = @EntryDate}})
+        <label>Departure date:</label>
+        @Html.CheckBox("SearchForDepartureDate", SearchForDepartureDate)
+        @Html.EditorFor(model => model.DepartureDate, new {htmlAttributes = new {@class = "datepicker", @value = DepartureDate}})
+        <input type="reset" value="Reset" class="btn btn-primary">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </fieldset>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingTypeId)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="CarId" asp-route-OldFieldName="@OldFieldName" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-OwnerId="@OwnerId" asp-route-CardId="@CarId" asp-route-DepatureDate="@DepartureDate" asp-route-EntryDate="@EntryDate" asp-route-SearchForDepatrureDate="@SearchForDepartureDate" asp-route-SearchForEntryDate="@SearchForEntryDate" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.CarId)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="CarMark" asp-route-OldFieldName="@OldFieldName" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-OwnerId="@OwnerId" asp-route-CardId="@CarId" asp-route-DepatureDate="@DepartureDate" asp-route-EntryDate="@EntryDate" asp-route-SearchForDepatrureDate="@SearchForDepartureDate" asp-route-SearchForEntryDate="@SearchForEntryDate" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.CarMarkId)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="OwnerId" asp-route-OldFieldName="@OldFieldName" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-OwnerId="@OwnerId" asp-route-CardId="@CarId" asp-route-DepatureDate="@DepartureDate" asp-route-EntryDate="@EntryDate" asp-route-SearchForDepatrureDate="@SearchForDepartureDate" asp-route-SearchForEntryDate="@SearchForEntryDate" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.OwnerId)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="OwnerNumber" asp-route-OldFieldName="@OldFieldName" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-OwnerId="@OwnerId" asp-route-CardId="@CarId" asp-route-DepatureDate="@DepartureDate" asp-route-EntryDate="@EntryDate" asp-route-SearchForDepatrureDate="@SearchForDepartureDate" asp-route-SearchForEntryDate="@SearchForEntryDate" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.OwnerNumber)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="EntryDate" asp-route-OldFieldName="@OldFieldName" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-OwnerId="@OwnerId" asp-route-CardId="@CarId" asp-route-DepatureDate="@DepartureDate" asp-route-EntryDate="@EntryDate" asp-route-SearchForDepatrureDate="@SearchForDepartureDate" asp-route-SearchForEntryDate="@SearchForEntryDate" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.EntryDate)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="DepartureDate" asp-route-OldFieldName="@OldFieldName" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-OwnerId="@OwnerId" asp-route-CardId="@CarId" asp-route-DepatureDate="@DepartureDate" asp-route-EntryDate="@EntryDate" asp-route-SearchForDepatrureDate="@SearchForDepartureDate" asp-route-SearchForEntryDate="@SearchForEntryDate" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.DepartureDate)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ParkingRecords) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.PaymentTariffId.ParkingType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.Car.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.Car.CarMark.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.Car.Owner.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.Car.Owner.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.EntryTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item2)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Item1.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Item1.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Item1.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                changemonth: true,
+                changeyear: true,
+            });
+        });
+    </script>
+}
+ <page-link page-model="@Model.PageViewModel" page-action="Index"
+           page-url-CarId="@CarId"
+           page-url-OwnerId="@OwnerId"
+           page-url-ParkingTypeId="@ParkingTypeId"
+           page-url-SearchForEntryDate="@SearchForEntryDate"
+           page-url-SearchForDepartureDate="@SearchForDepartureDate"
+           page-url-EndtryDate="@Model.EntryDate"
+           page-url-DepartureDate="@Model.DepartureDate"
+           page-url-OldFieldName="@OldFieldName"
+           page-url-sortOrder="@(Model.SortViewModel.CurrentState)"></page-link>

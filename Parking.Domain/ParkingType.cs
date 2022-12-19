@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Parking.Domain
+namespace WebParking.Domain
 {
     public partial class ParkingType
     {

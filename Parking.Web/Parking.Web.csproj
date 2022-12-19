@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-Parking.Web-A958BCD7-26C2-4F1B-9A7E-1229CCA3E300</UserSecretsId>
+    <UserSecretsId>aspnet-Parking.Web-0C0A41A9-7CEB-4573-8DDB-9926A72685AA</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Parking.Domain\Parking.Domain.csproj" />
+    <ProjectReference Include="..\Parking.Persistance\Parking.Persistance.csproj" />
     <ProjectReference Include="..\Parling.Application\Parking.Application.csproj" />
   </ItemGroup>
 

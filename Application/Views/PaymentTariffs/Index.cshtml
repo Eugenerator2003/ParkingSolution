@@ -1,0 +1,78 @@
+﻿@model PaymentTariffsViewModel
+
+@{
+    ViewData["Title"] = "Payment tariffs";
+    SortState SortOrder = Model.SortViewModel.CurrentState;
+    string OldFieldName = Model.SortViewModel.FieldName;
+    decimal? Payment = Model.Payment;
+    int? ParkingTypeId = Model.ParkingTypeId;
+    int? DaysCount = Model.DaysCount > 0 ? Model.DaysCount : null;
+}
+
+<h1>Payment tariffs</h1>
+
+<p>
+    <a asp-action="Create">Create new payment tariff</a>
+</p>
+@using (Html.BeginForm("Index", "PaymentTariffs", FormMethod.Get)) 
+{
+    <fieldset>
+        <label>Days count:</label>
+        <input name="DaysCount" value="@DaysCount">
+        <label>Minimal Payment:</label>
+        <input name="Payment" value="@Payment">
+        <label>Parking type:</label>
+        @Html.DropDownList("ParkingTypeId", Model.ParkingTypes)
+        <input type="reset" value="Reset" class="btn btn-primary">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </fieldset>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="ParkingTypeId" asp-route-OldFieldName="@OldFieldName" asp-route-DaysCount="@DaysCount" asp-route-Payment="@Payment" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.ParkingTypeId)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="DaysCount" asp-route-OldFieldName="@OldFieldName" asp-route-DaysCount="@DaysCount" asp-route-Payment="@Payment" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.DaysCount)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="Payment" asp-route-OldFieldName="@OldFieldName" asp-route-DaysCount="@DaysCount" asp-route-Payment="@Payment" asp-route-ParkingTypeId="@ParkingTypeId" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.Payment)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PaymentTariffs) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaysCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Payment)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<page-link page-model="@Model.PageViewModel" page-action="Index"
+           page-url-Payment="@Payment"
+           page-url-ParkingTypeId="@ParkingTypeId"
+           page-url-ParkingTypeId="@ParkingTypeId"
+           page-url-DaysCount="@DaysCount"
+           page-url-OldFieldName="@OldFieldName"
+           page-url-sortOrder="@(Model.SortViewModel.CurrentState)"></page-link>

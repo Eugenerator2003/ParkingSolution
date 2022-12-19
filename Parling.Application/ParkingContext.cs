@@ -1,10 +1,10 @@
 ﻿using System;
-using Parking.Domain;
+using WebParking.Domain;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Parking.Application
+namespace WebParking.Application
 {
     public partial class ParkingContext : DbContext
     {
@@ -167,7 +167,7 @@ namespace Parking.Application
                     .HasColumnType("datetime")
                     .HasColumnName("startTime");
 
-                entity.HasOne(d => d.Emploeyee)
+                entity.HasOne(d => d.Employee)
                     .WithMany(p => p.WorkShifts)
                     .HasForeignKey(d => d.EmploeyeeId)
                     .OnDelete(DeleteBehavior.Cascade)

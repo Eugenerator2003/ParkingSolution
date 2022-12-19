@@ -1,0 +1,77 @@
+﻿@model CarsViewModel
+
+@{
+    ViewData["Title"] = "Cars";
+    string Number = Model.Number;
+    int? CarMarkId = Model.CarMarkId;
+    int? OwnerId = Model.OwnerId;
+    SortState SortOrder = Model.SortViewModel.CurrentState;
+    string OldFieldName = Model.SortViewModel.FieldName;
+}
+
+<h1>Cars</h1>
+
+<p>
+    <a asp-action="Create">Create record about car</a>
+</p>
+@using (Html.BeginForm("Index", "Cars", FormMethod.Get))
+{
+    <fieldset>
+        <label>Number:</label>
+        <input name="Number" value="@Number">
+        <label>Owner:</label>
+        @Html.DropDownList("OwnerId", Model.Owners)
+        <label>Car mark:</label>
+        @Html.DropDownList("CarMarkId", Model.CarMarks)
+        <input class='button' type='reset' value="Reset">
+        <input type="submit" value="Search" />
+    </fieldset>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="Number" asp-route-OldFieldName="@OldFieldName" asp-route-Number="@Number" asp-route-CarMarkId="@CarMarkId" asp-route-OwnerId="@OwnerId" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.Number)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="CarMarkId" asp-route-OldFieldName="@OldFieldName" asp-route-Number="@Number" asp-route-CarMarkId="@CarMarkId" asp-route-OwnerId="@OwnerId" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.CarMarkId)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="OwnerId" asp-route-OldFieldName="@OldFieldName" asp-route-Number="@Number" asp-route-CarMarkId="@CarMarkId" asp-route-OwnerId="@OwnerId" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.OwnerId)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Cars) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarMark.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.Fullname)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<page-link page-model="@Model.PageViewModel" page-action="Index"
+           page-url-CarMarkId="@CarMarkId"
+           page-url-OwnerId="@OwnerId"
+           page-url-Number="@Number"
+           page-url-OldFieldName="@OldFieldName"
+           page-url-sortOrder="@(Model.SortViewModel.CurrentState)"></page-link>

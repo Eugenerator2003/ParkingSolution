@@ -1,29 +1,42 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Parking.Application;
 using Parking.Web.Data;
+using Parking.Application;
+
 
 namespace Parking.Web
 {
     public class Program
     {
+        private static void ConfigureAuthorization(IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Employee", policy => policy.RequireRole("Employee"));
+            });
+        }
+
+        private static void ConfigureServices(IServiceCollection services, string connectionString)
+        {
+            services.AddDbContext<UserContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            services.AddDbContext<ParkingContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<UserContext>();
+
+            ConfigureAuthorization(services);
+        }
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-
-            builder.Services.AddDbContext<ParkingContext>(options =>
-                options.UseSqlServer(connectionString));
-
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddControllersWithViews();
+            ConfigureServices(builder.Services, builder.Configuration.GetConnectionString("DefaultConnection"));
 
             var app = builder.Build();
 

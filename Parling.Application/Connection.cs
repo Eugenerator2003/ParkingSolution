@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Parking.Application
+namespace WebParking.Application
 {
     internal static class Connection
     {

@@ -1,0 +1,49 @@
+﻿@model CarMarksViewModel
+
+@{
+    ViewData["Title"] = "Car marks";
+    string CarMarkName = @Model.CarMarkName;
+    SortState SortOrder = Model.SortViewModel.CurrentState;
+    string OldFieldName = "CarMarkName";
+}
+
+<h1>Car marks</h1>
+<p>
+    <a asp-action="Create">Create record about car mark</a>
+</p>
+<form method="Get">
+    <label>Car mark:</label>
+    <input name="CarMarkName" value="@Model.CarMarkName"/>
+    <input type="reset" value="Reset" class="btn btn-primary">
+    <input type="submit" value="Search" class="btn btn-primary" />
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-SortOrder="@SortOrder" asp-route-FieldName="CarMarkName" asp-route-OldFieldName="CarMarkName" asp-route-CarMarkName="@CarMarkName">
+                    @Html.DisplayNameFor(model => model.CarMarks.First().Name)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CarMarks) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<page-link page-model="@Model.PageViewModel" page-action="Index"
+           page-url-CarMarkName="@CarMarkName"
+           page-url-OldFieldName="@OldFieldName"
+           page-url-sortOrder="@(Model.SortViewModel.CurrentState)"></page-link>

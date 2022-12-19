@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model WebParking.Models.Users.ChangeUserRoleViewModel
+@{
+    ViewData["Title"] = "Role editing";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h3>Role editing: @Model.Email</h3>
+        <hr />
+        <form asp-action="ChangeUserRole" asp-controller="Users" method="post">
+            <div class="form-floating mb-1">
+                @foreach (IdentityRole role in Model.AllRoles)
+                {
+                    <div>
+                        <input class="form-check-input" name="roles" type="checkbox" value="@role.Name"
+                           @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />
+                        <label class="form-check-label">@role.Name</label>
+                    </div>
+                }
+            </div>
+            <div class="form-floating mb-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class=" btn btn-danger" asp-action="Index">Back</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+

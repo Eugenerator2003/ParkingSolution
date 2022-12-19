@@ -115,6 +115,7 @@ namespace Parking.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    _logger.LogInformation($"{Input.Email}");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

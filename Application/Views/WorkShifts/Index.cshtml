@@ -1,0 +1,92 @@
+﻿@model WorkShiftsViewModel
+
+@{
+    ViewData["Title"] = "Work shift";
+    int? EmployeeId = Model.EmployeeId;
+    string OldFieldName = Model.SortViewModel.FieldName;
+    SortState SortOrder = Model.SortViewModel.CurrentState;
+    bool? SearchForDate = Model.SearchForDate;
+    DateTime Date = Model.Date ?? DateTime.Now;
+}
+
+<h1>Work shift</h1>
+
+<p>
+    <a asp-action="Create">Create new work shift record</a>
+</p>
+@using (Html.BeginForm("Index", "WorkShifts", FormMethod.Get))
+{
+    <fieldset>
+        <label>Employee</label>
+        @Html.DropDownList("EmployeeId", Model.Employees)
+        <label>For date</label>
+        @Html.CheckBox("SearchForDate", SearchForDate)
+        @Html.EditorFor(model => model.Date, new {htmlAttributes = new {@class = "datepicker", @value = @Date}})
+        <input type="reset" value="Reset" class="btn btn-primary">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </fieldset>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="Date" asp-route-OldFieldName="@OldFieldName" asp-route-EmployeeId="@EmployeeId" asp-route-Date="@Model.Date" asp-route-SearchForDate="@SearchForDate" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="EmployeeId" asp-route-OldFieldName="@OldFieldName" asp-route-EmployeeId="@EmployeeId" asp-route-Date="@Model.Date" asp-route-SearchForDate="@SearchForDate" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.EmployeeId)
+                </a>
+            </th>
+            <th>
+                Payment
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.WorkShifts) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.Employee.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item2)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Item1.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Item1.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Item1.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                changemonth: true,
+                changeyear: true,
+            });
+        });
+    </script>
+}
+    <page-link page-model="@Model.PageViewModel" page-action="Index"
+           page-url-EmployeeId="@EmployeeId"
+           page-url-SearchForDate="@SearchForDate"
+           page-url-Date="@Model.Date"
+           page-url-OldFieldName="@OldFieldName"
+           page-url-sortOrder="@(Model.SortViewModel.CurrentState)"></page-link>

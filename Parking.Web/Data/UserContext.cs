@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Parking.Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class UserContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public UserContext(DbContextOptions<UserContext> options)
             : base(options)
         {
+            
         }
     }
 }

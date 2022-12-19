@@ -1,0 +1,46 @@
+﻿@model EarningBillViewModel
+
+@{
+    ViewBag.Title = "Salary bill";
+    DateTime date = Model.Date;
+}
+
+<h1>Salary</h1>
+
+<div>
+    <a asp-action="Index">Back to records</a>
+</div>
+<br />
+@using (Html.BeginForm("Salary", "ParkingRecords", FormMethod.Get))
+{
+    <fieldset>
+        <label>Get bill for month:</label>
+        @Html.EditorFor(model => model.Date, new {htmlAttributes = new {@class = "datepicker", @value = @date}})
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </fieldset>
+}
+
+<div>
+@if (Model.Earning is not null) {
+    @Html.DisplayNameFor(model => model.Earning)
+    @Html.DisplayFor(model => model.Earning)
+}
+</div>
+<div>
+@if (Model.Salary is not null) {
+    @Html.DisplayNameFor(model => model.Salary)
+    @Html.DisplayFor(model => model.Salary)
+}
+
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "mm-yy",
+                changemonth: true,
+            });
+        });
+    </script>
+}

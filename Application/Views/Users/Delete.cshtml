@@ -1,0 +1,30 @@
+﻿@model WebParking.Models.Users.DeleteUserViewModel
+@{
+    ViewData["Title"] = "Удаление пользователя";
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <h3>Are you sure you want to delete the user?</h3>
+        <hr />
+
+        <b>Почта:</b> @Model.Email<br>
+        <b>Роли:</b>
+       
+        <ul>
+            @foreach (var role in Model.UserRoles)
+            {
+                <li>@role</li>
+            }
+        </ul>
+          
+        <form asp-action="Delete" asp-controller="Users">
+            <input type="submit" value="Delete" class="btn btn-primary" />
+            <a class=" btn btn-danger" asp-action="Index">Back</a>
+        </form>
+
+    </div>
+</div>
+
+
+

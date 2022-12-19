@@ -1,0 +1,42 @@
+﻿@model WebParking.Domain.PaymentTariff
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Payment tariff</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ParkingTypeId" class="control-label"></label>
+                <select asp-for="ParkingTypeId" class ="form-control" asp-items="ViewBag.ParkingTypeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DaysCount" class="control-label"></label>
+                <input asp-for="DaysCount" class="form-control" />
+                <span asp-validation-for="DaysCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Payment" class="control-label"></label>
+                <input asp-for="Payment" class="form-control" />
+                <span asp-validation-for="Payment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

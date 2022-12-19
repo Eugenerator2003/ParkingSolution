@@ -1,0 +1,65 @@
+﻿@model CarOwnersViewModel
+
+@{
+    ViewData["Title"] = "Car owners";
+    SortState SortOrder = Model.SortViewModel.CurrentState;
+    string Fullname = Model.Fullname;
+    long? PhoneNumber = Model.PhoneNumber;
+    string OldFieldName = Model.SortViewModel.FieldName;
+}
+
+<h1>Car owners</h1>
+
+<p>
+    <a asp-action="Create">Create record about owner</a>
+</p>
+<p>
+    <a asp-action="Regular">Make regural customers list</a>
+</p>
+<form method="Get">
+    <label>Owner name:</label>
+    <input name="Fullname" value="@Fullname"/>
+    <label>Phone number:</label>
+    <input name="PhoneNumber" value="@PhoneNumber"/>
+    <input type="reset" value="Reset" class="btn btn-primary">
+    <input type="submit" value="Search" class="btn btn-primary" />
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="Fullname" asp-route-OldFieldName="@OldFieldName" asp-route-Fullname="@Fullname" asp-route-PhoneNumber="@PhoneNumber" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.Fullname)
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-FieldName="PhoneNumber" asp-route-OldFieldName="@OldFieldName" asp-route-Fullname="@Fullname" asp-route-PhoneNumber="@PhoneNumber" asp-route-SortOrder="@SortOrder">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Owners) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-Fullname="@Fullname"
+           page-url-PhoneNumber="@PhoneNumber"
+           page-url-OldFieldName="@OldFieldName"
+           page-url-sortOrder="@(Model.SortViewModel.CurrentState)"></page-link>

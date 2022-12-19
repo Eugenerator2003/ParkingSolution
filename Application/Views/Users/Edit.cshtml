@@ -1,0 +1,34 @@
+﻿@model WebParking.Models.Users.EditUserViewModel
+@{
+    ViewData["Title"] = "Editing user information";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h3>User information editing</h3>
+        <hr />
+        <form asp-action="Edit" asp-controller="Users">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class = "form-floating mb-3">
+                <input type="email" class="form-control" value="@Model.Email" asp-for="Email">
+                <label>Email</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" asp-for="NewPassword" class="form-control">
+                <label>New password</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="submit" value="Save changes" class="btn btn-primary" />
+                <a class=" btn btn-danger" asp-action="Index">Back</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
