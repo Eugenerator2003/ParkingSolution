@@ -20,11 +20,41 @@
             }
         }
 
+        public int PreviousPagesCount
+        {
+            get
+            {
+                if (PageNumber < 5)
+                {
+                    return PageNumber - 1;
+                }
+                else
+                {
+                    return 5;
+                }
+            }
+        }
+
         public bool HasNextPage
         {
             get
             {
                 return (PageNumber < TotalPages);
+            }
+        }
+
+        public int NextPagesCount
+        {
+            get
+            {
+                if (TotalPages - PageNumber < 10)
+                {
+                    return TotalPages - PageNumber;
+                }
+                else
+                {
+                    return 10;
+                }
             }
         }
     }

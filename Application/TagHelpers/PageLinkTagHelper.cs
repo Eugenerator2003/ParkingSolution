@@ -39,16 +39,25 @@ namespace WebParking.TagHelpers
             // создаем ссылку на предыдущую страницу, если она есть
             if (PageModel.HasPreviousPage)
             {
-                TagBuilder prevItem = CreateTag(PageModel.PageNumber - 1, urlHelper);
-                tag.InnerHtml.AppendHtml(prevItem);
+                for (var i = PageModel.PreviousPagesCount; i > 0 /*&& PageModel.PageNumber - i > 0*/; i--)
+                {
+                    if (PageModel.PageNumber - i > 0)
+                    {
+                        TagBuilder prevItem = CreateTag(PageModel.PageNumber - i, urlHelper);
+                        tag.InnerHtml.AppendHtml(prevItem);
+                    }
+                }
             }
 
             tag.InnerHtml.AppendHtml(currentItem);
             // создаем ссылку на следующую страницу, если она есть
             if (PageModel.HasNextPage)
             {
-                TagBuilder nextItem = CreateTag(PageModel.PageNumber + 1, urlHelper);
-                tag.InnerHtml.AppendHtml(nextItem);
+                for (var i = 0; i < PageModel.NextPagesCount; i++)
+                {
+                    TagBuilder nextItem = CreateTag(PageModel.PageNumber + i + 1, urlHelper);
+                    tag.InnerHtml.AppendHtml(nextItem);
+                }
             }
             output.Content.AppendHtml(tag);
         }

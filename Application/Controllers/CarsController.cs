@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using Parking.Domain.Models;
 using WebParking.Application;
-using WebParking.Domain;
 using WebParking.ViewModels;
 
 namespace WebParking.Controllers
 {
+    [Authorize()]
     public class CarsController : Controller
     {
         private readonly ParkingContext _context;
@@ -114,6 +115,7 @@ namespace WebParking.Controllers
             {
                 _context.Add(car);
                 await _context.SaveChangesAsync();
+                _cache.SetItem(null, modelName);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CarMarkId"] = new SelectList(_context.CarMarks, "Id", "Name", car.CarMarkId);
@@ -156,6 +158,7 @@ namespace WebParking.Controllers
                 try
                 {
                     _context.Update(car);
+                    _cache.SetItem(null, modelName);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -209,6 +212,7 @@ namespace WebParking.Controllers
             if (car != null)
             {
                 _context.Cars.Remove(car);
+                _cache.SetItem(null, modelName);
             }
             
             await _context.SaveChangesAsync();

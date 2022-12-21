@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebParking.Domain
+namespace Parking.Domain.Models
 {
     public partial class CarMark
     {

@@ -74,29 +74,29 @@ namespace WebParking.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Не указан электронный адрес")]
-            [EmailAddress(ErrorMessage = "Некорректный электронный адрес")]
-            [Display(Name = "Электронный адрес")]
+            [Required(ErrorMessage = "Email address not specified")]
+            [EmailAddress(ErrorMessage = "Incorrect email address")]
+            [Display(Name = "Email addrss")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Не указан пароль")]
-            [StringLength(100, ErrorMessage = "Пароль должен иметь минимум {2} и максимум {1} символов.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Password not specified")]
             [DataType(DataType.Password)]
-            [Display(Name = "Пароль")]
+            [StringLength(100, ErrorMessage = "Field {0} must contain minimum {2} and maximum chars {1} символов.", MinimumLength = 6)]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Не указан пароль для подтверждения")]
+            [Required(ErrorMessage = "Password confirmation not specified")]
             [DataType(DataType.Password)]
-            [Display(Name = "Подтверждение пароля")]
-            [Compare("Password", ErrorMessage = "Пароли не совпадают.")]
+            [StringLength(100, ErrorMessage = "Field {0} must contain minimum {2} and maximum chars {1} символов.", MinimumLength = 6)]
+            [Compare("Password", ErrorMessage = "Passwords doesn't match")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -157,7 +157,7 @@ namespace WebParking.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Пользователь уже существует.");
+                    ModelState.AddModelError(string.Empty, "User already exists");
                 }
 
             }

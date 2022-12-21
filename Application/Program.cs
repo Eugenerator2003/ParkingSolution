@@ -1,9 +1,10 @@
+global using Parking.Domain;
+using Parking.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebParking.Data;
 using WebParking.Middleware;
 using WebParking.Validators;
-using WebParking.Domain;
 using WebParking.Application;
 using WebParking.Managers;
 
@@ -36,8 +37,9 @@ namespace WebParking
 
             builder.Services.AddTransient<ParkingAccountant>();
             builder.Services.AddTransient<EmployeeManager>();
+            builder.Services.AddTransient<OwnerManager>();
 
-            builder.Services.AddTransient<CacheService.CacheProvider>();
+            builder.Services.AddTransient<CacheProvider>();
             builder.Services.AddMemoryCache();
             builder.Services.AddDistributedMemoryCache();
 

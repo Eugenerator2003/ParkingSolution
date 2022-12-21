@@ -35,7 +35,7 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        [Display(Name = "Почта")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         /// <summary>
@@ -68,9 +68,9 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Не указан новый электронный адрес")]
-            [EmailAddress(ErrorMessage = "Некорректный электронный адрес")]
-            [Display(Name = "Новый электронный адрес")]
+            [Required(ErrorMessage = "Email address not specified")]
+            [EmailAddress(ErrorMessage = "Incorrect email address")]
+            [Display(Name = "New email adderss")]
             public string NewEmail { get; set; }
         }
 
@@ -133,7 +133,7 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
                     var setUserNameResult = await _userManager.SetUserNameAsync(user, Input.NewEmail);
                     if (result.Succeeded && setUserNameResult.Succeeded)
                     {
-                        StatusMessage = "Данные были обновлены.";
+                        StatusMessage = "The data has been updated.";
                         await _signInManager.RefreshSignInAsync(user);
                         return RedirectToPage();
                     }
@@ -141,7 +141,7 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
                     {
                         if (!await _userManager.IsInRoleAsync(user, "admin") && user.Email.Contains("admin"))
                         {
-                            ModelState.AddModelError(string.Empty, "Невозможно использовать слово admin");
+                            ModelState.AddModelError(string.Empty, "Can't use word admin");
                         }
                         foreach (var error in result.Errors)
                         {
@@ -152,11 +152,11 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
                 }
                 else
                 {
-                    StatusMessage = "Пользователь уже существует.";
+                    StatusMessage = "The user already exists.";
                     return RedirectToPage();
                 }
             }
-            StatusMessage = "Почта не была изменена.";
+            StatusMessage = "The mail has not been changed.";
             return RedirectToPage();
         }
 

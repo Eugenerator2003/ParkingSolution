@@ -2,7 +2,7 @@
 
 namespace WebParking.Utils
 {
-    public class ViewModelComparsion
+    public static class ViewModelComparsion
     {
         public static bool Compare(SortViewModel sortViewModel, SortState sortOrder, string fieldName)
         {

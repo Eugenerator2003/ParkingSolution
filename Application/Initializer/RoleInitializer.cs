@@ -11,7 +11,7 @@ namespace WebParking.Initializer
             await applicationDbContext.Database.MigrateAsync();
 
             string adminEmail = "admin@gmail.com";
-            string password = "Admin_2003";
+            string password = "Adminota_9";
 
             if (await roleManager.FindByNameAsync("admin") == null)
             {

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Owner>
+
+@{
+    ViewData["Title"] = "Regular";
+    DateTime date = ViewBag.Date;
+    string formatString = $"{date.Month}.{date.Year}";
+}
+
+<h3>Regular owners</h3>
+<h4>Month: @formatString</h4>
+<hr />
+@foreach(var owner in Model){
+    <h5>Name: @owner.Fullname</h5>
+    <h5>Phone number: +@owner.PhoneNumber</h5>
+    <table>
+        <thead><tr><th>Mark</th><th>Number</th></tr></thead>
+        <tbody>
+            @foreach(var car in owner.Cars){
+                <tr>
+                    <td>
+                        @car.CarMark.Name
+                    </td>
+                    <td>
+                        @car.Number
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr />
+}
+
+<a asp-action="Index">Back to list</a>

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Parking.Domain.Models;
 using WebParking.Application;
-using WebParking.Domain;
 using WebParking.Managers;
 using WebParking.ViewModels;
 
 namespace WebParking.Controllers
 {
+    [Authorize()]
     public class WorkShiftsController : Controller
     {
         private readonly ParkingContext _context;
@@ -75,6 +76,8 @@ namespace WebParking.Controllers
                 WorkShifts = context
             };
 
+            _cache.SetItem(viewModel, modelName);
+
             return View(viewModel);
         }
 
@@ -115,6 +118,7 @@ namespace WebParking.Controllers
             {
                 _context.Add(workShift);
                 await _context.SaveChangesAsync();
+                _cache.SetItem(null, modelName);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EmploeyeeId"] = new SelectList(_context.Emploeyees, "Id", "Fullname", workShift.EmploeyeeId);
@@ -155,6 +159,7 @@ namespace WebParking.Controllers
                 try
                 {
                     _context.Update(workShift);
+                    _cache.SetItem(null, modelName);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -206,6 +211,7 @@ namespace WebParking.Controllers
             if (workShift != null)
             {
                 _context.WorkShifts.Remove(workShift);
+                _cache.SetItem(null, modelName);
             }
             
             await _context.SaveChangesAsync();

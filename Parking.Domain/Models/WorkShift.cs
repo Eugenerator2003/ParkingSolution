@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebParking.Domain
+namespace Parking.Domain.Models
 {
     public partial class WorkShift
     {
@@ -16,6 +16,7 @@ namespace WebParking.Domain
         [DataType(DataType.Time)]
         public DateTime? EndTime { get; set; }
         public int? EmploeyeeId { get; set; }
+        [Display(Name = "Employee")]
         public virtual Emploeyee? Employee { get; set; }
     }
 }

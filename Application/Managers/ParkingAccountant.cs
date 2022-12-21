@@ -1,6 +1,6 @@
-﻿using Remotion.Linq.Parsing.ExpressionVisitors.MemberBindings;
+﻿using Parking.Domain.Models;
+using Remotion.Linq.Parsing.ExpressionVisitors.MemberBindings;
 using WebParking.Application;
-using WebParking.Domain;
 
 namespace WebParking.Managers
 {

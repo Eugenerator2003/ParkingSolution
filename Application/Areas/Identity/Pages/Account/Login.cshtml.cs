@@ -64,25 +64,27 @@ namespace WebParking.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Не указан электронный адрес")]
-            [EmailAddress(ErrorMessage = "Некорректный электронный адрес")]
-            [Display(Name = "Электронный адрес")]
+
+            [Required(ErrorMessage = "Email address not specified")]
+            [EmailAddress(ErrorMessage = "Incorrect email address")]
+            [Display(Name = "Email addrss")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Не указан пароль")]
+            [Required(ErrorMessage = "Password not specified")]
             [DataType(DataType.Password)]
-            [Display(Name = "Пароль")]
+            [StringLength(100, ErrorMessage = "Field {0} must contain minimum {2} and maximum chars {1} символов.", MinimumLength = 6)]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Запомнить меня?")]
+            [Display(Name = "Remember me")]
             public bool RememberMe { get; set; }
         }
 
@@ -130,7 +132,7 @@ namespace WebParking.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Ошибка входа в систему.Проверьте личные данные");
+                    ModelState.AddModelError(string.Empty, "Login failed. Please check your personal details");
                     return Page();
                 }
             }

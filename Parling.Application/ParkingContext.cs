@@ -1,8 +1,8 @@
 ﻿using System;
-using WebParking.Domain;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Parking.Domain.Models;
 
 namespace WebParking.Application
 {

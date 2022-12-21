@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Parking.Domain.Models;
 using WebParking.Application;
-using WebParking.Domain;
 using WebParking.Managers;
 using WebParking.ViewModels;
 
 namespace WebParking.Controllers
 {
+    [Authorize()]
     public class ParkingRecordsController : Controller
     {
         private readonly ParkingContext _context;
@@ -157,6 +158,7 @@ namespace WebParking.Controllers
 
             _context.Add(parkingRecord);
             await _context.SaveChangesAsync();
+            _cache.SetItem(null, modelName);
             return RedirectToAction(nameof(Index));
 
             ViewData["CarId"] = new SelectList(_context.Cars, "Id", "Number", parkingRecord.CarId);
@@ -174,7 +176,10 @@ namespace WebParking.Controllers
                 return NotFound();
             }
 
-            var parkingRecord = await _context.ParkingRecords.FindAsync(id);
+            var parkingRecord =  _context.ParkingRecords
+                                .Include(r => r.PaymentTariffId)
+                                .Include(r => r.PaymentTariffId.ParkingType)
+                                .FirstOrDefault(r => r.Id == id);
             if (parkingRecord == null)
             {
                 return NotFound();
@@ -214,6 +219,7 @@ namespace WebParking.Controllers
                 try
                 {
                     _context.Update(parkingRecord);
+                    _cache.SetItem(null, modelName);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -270,6 +276,7 @@ namespace WebParking.Controllers
             if (parkingRecord != null)
             {
                 _context.ParkingRecords.Remove(parkingRecord);
+                _cache.SetItem(null, modelName);
             }
 
             await _context.SaveChangesAsync();

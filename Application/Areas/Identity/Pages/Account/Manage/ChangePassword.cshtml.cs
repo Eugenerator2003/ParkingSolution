@@ -52,30 +52,29 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Не указан старый пароль")]
+            [Required(ErrorMessage = "Old password not specified")]
+            [Display(Name = "Old password")]
             [DataType(DataType.Password)]
-            [Display(Name = "Текущий пароль")]
             public string OldPassword { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Не указан новый пароль")]
-            [StringLength(100, ErrorMessage = "Пароль должен иметь минимум {2} и максимум {1} символов.", MinimumLength = 6)]
+            [Required(ErrorMessage = "New password not specified")]
             [DataType(DataType.Password)]
-            [Display(Name = "Новый пароль")]
+            [StringLength(100, ErrorMessage = "Field {0} must contain minimum {2} and maximum chars {1} символов.", MinimumLength = 6)]
+            [Display(Name = "New password")]
             public string NewPassword { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            /// 
-            [Required(ErrorMessage = "Не указан пароль для подтверждения")]
+            [Required(ErrorMessage = "Password confirmation not specified")]
             [DataType(DataType.Password)]
-            [Display(Name = "Подтверждение нового пароля")]
-            [Compare("NewPassword", ErrorMessage = "Новые пароли не совпадают.")]
+            [StringLength(100, ErrorMessage = "Field {0} must contain minimum {2} and maximum chars {1} символов.", MinimumLength = 6)]
+            [Compare("NewPassword", ErrorMessage = "Passwords doesn't match")]
             public string ConfirmPassword { get; set; }
         }
 

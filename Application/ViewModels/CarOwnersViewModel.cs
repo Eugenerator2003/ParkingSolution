@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebParking.Domain;
+using Parking.Domain.Models;
 
 namespace WebParking.ViewModels
 {

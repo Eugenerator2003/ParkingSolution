@@ -23,6 +23,7 @@ namespace WebParking.Models.Users
 
         [Required(ErrorMessage = "Old password not specified")]
         [Display(Name = "Old password")]
+        [DataType(DataType.Password)]
         public string OldPassword { get; set; }
 
     }

@@ -1,4 +1,4 @@
-﻿using WebParking.Domain;
+﻿using Parking.Domain.Models;
 
 namespace WebParking.Managers
 {

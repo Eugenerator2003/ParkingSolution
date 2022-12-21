@@ -1,6 +1,6 @@
 ﻿namespace WebParking.Utils
 {
-    public class CookieProccesor
+    public static class CookieProccesor
     {
         public static string? GetSetValue(string key, string value, bool first, HttpRequest request, HttpResponse response)
         {

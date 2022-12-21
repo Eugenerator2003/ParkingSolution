@@ -7,22 +7,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebParking.Application;
-using WebParking.Domain;
 using WebParking.ViewModels;
+using WebParking.Managers;
+using Parking.Domain.Models;
 
 namespace WebParking.Controllers
 {
+    [Authorize()]
     public class OwnersController : Controller
     {
         private readonly ParkingContext _context;
         private CacheProvider _cache;
         private const int _pageSize = 20;
         private const string modelName = "OwnersViewModel";
+        private OwnerManager _manager;
 
-        public OwnersController(ParkingContext context, CacheProvider cacheProvider)
+        public OwnersController(ParkingContext context, OwnerManager ownerManager, CacheProvider cacheProvider)
         {
             _context = context;
             _cache = cacheProvider;
+            _manager = ownerManager;
         }
 
         // GET: Owners
@@ -97,6 +101,7 @@ namespace WebParking.Controllers
             {
                 _context.Add(owner);
                 await _context.SaveChangesAsync();
+                _cache.SetItem(null, modelName);
                 return RedirectToAction(nameof(Index));
             }
             return View(owner);
@@ -135,6 +140,7 @@ namespace WebParking.Controllers
                 try
                 {
                     _context.Update(owner);
+                    _cache.SetItem(null, modelName);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -184,10 +190,28 @@ namespace WebParking.Controllers
             if (owner != null)
             {
                 _context.Owners.Remove(owner);
+                _cache.SetItem(null, modelName);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        
+        // GET
+        public async Task<IActionResult> Regular()
+        {
+            IEnumerable<ParkingRecord> records = _context.ParkingRecords
+                                                 .Include(r => r.Car)
+                                                 .Include(r => r.Car.CarMark)
+                                                 .Include(r => r.Car.Owner);
+
+            var date = DateTime.Now.AddMonths(1);
+
+            var owners = _manager.GetRegularOwners(records, date);
+
+            ViewBag.Date = date;
+
+            return View(owners);
         }
 
         private bool OwnerExists(int id)

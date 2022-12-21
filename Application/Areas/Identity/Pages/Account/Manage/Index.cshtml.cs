@@ -30,7 +30,7 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
 
-        [Display(Name = "Никнейм")]
+        [Display(Name = "Username")]
         public string Username { get; set; }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
-            [Display(Name = "Номер телефона")]
+            [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
         }
 
@@ -107,13 +107,13 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    StatusMessage = "Ошибка при попытке сохранение номера телефона.";
+                    StatusMessage = "An error occurred while trying to save a phone number.";
                     return RedirectToPage();
                 }
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Профиль был обновлен";
+            StatusMessage = "Profile has been updated";
             return RedirectToPage();
         }
     }

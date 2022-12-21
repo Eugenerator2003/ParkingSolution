@@ -1,14 +1,14 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Регистрация";
+    ViewData["Title"] = "Registration";
 }
 
 
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Создание нового аккаунта</h2>
+            <h2>Register new account</h2>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-floating mb-3">
@@ -23,7 +23,7 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Зарегистироваться</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
 

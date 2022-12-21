@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Parking.Domain.Models;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
-using WebParking.Domain;
 
 namespace WebParking.ViewModels
 {

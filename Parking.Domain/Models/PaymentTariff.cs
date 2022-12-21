@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebParking.Domain
+namespace Parking.Domain.Models
 {
     public partial class PaymentTariff
     {

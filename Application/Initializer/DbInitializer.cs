@@ -1,9 +1,9 @@
-﻿using System.Collections.Specialized;
+﻿global using Parking.Domain.Models;
+using System.Collections.Specialized;
 using WebParking.Application;
-using WebParking.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebParking
+namespace WebParking.Initializer
 {
     public class DbInitializer
     {

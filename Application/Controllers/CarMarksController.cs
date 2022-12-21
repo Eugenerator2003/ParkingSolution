@@ -1,4 +1,5 @@
 ﻿global using WebParking.Utils;
+global using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebParking.Application;
-using WebParking.Domain;
 using WebParking.ViewModels;
+using WebParking.CacheService;
+using Parking.Domain.Models;
 
 namespace WebParking.Controllers
 {
+    [Authorize()]
     public class CarMarksController : Controller
     {
         private readonly ParkingContext _context;
@@ -95,6 +98,7 @@ namespace WebParking.Controllers
             {
                 _context.Add(carMark);
                 await _context.SaveChangesAsync();
+                _cache.SetItem(null, modelName);
                 return RedirectToAction(nameof(Index));
             }
             return View(carMark);
@@ -133,6 +137,7 @@ namespace WebParking.Controllers
                 try
                 {
                     _context.Update(carMark);
+                    _cache.SetItem(null, modelName);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -182,6 +187,7 @@ namespace WebParking.Controllers
             if (carMark != null)
             {
                 _context.CarMarks.Remove(carMark);
+                _cache.SetItem(null, modelName);
             }
             
             await _context.SaveChangesAsync();
