@@ -40,7 +40,9 @@ namespace WebParking.Controllers
             var viewModel = _cache.GetItem<WorkShiftsViewModel>(modelName);
 
             if (viewModel != null && viewModel.EmployeeId == EmployeeId &&
-                viewModel.Date.GetValueOrDefault().Date == Date.GetValueOrDefault().Date && 
+                (SearchForDate.Value ? (viewModel.SearchForDate == SearchForDate &&
+                                        viewModel.Date.GetValueOrDefault().Date == Date.GetValueOrDefault().Date)
+                                        : true) &&
                 viewModel.SearchForDate == SearchForDate && viewModel.PageViewModel.PageNumber == page &&
                 ViewModelComparsion.Compare(viewModel.SortViewModel, SortOrder, FieldName))
             {

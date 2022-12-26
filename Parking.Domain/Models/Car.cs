@@ -14,8 +14,10 @@ namespace Parking.Domain.Models
         public int Id { get; set; }
         public string? Number { get; set; }
 
+        [Display(Name = "Car mark")]
         public int? CarMarkId { get; set; }
 
+        [Display(Name = "Owner full name")]
         public int? OwnerId { get; set; }
 
         [Display(Name = "Car mark")]

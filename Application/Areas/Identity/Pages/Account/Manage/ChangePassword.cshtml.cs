@@ -120,7 +120,7 @@ namespace WebParking.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Ваш пароль был изменен.";
+            StatusMessage = "Your password was changed.";
 
             return RedirectToPage();
         }

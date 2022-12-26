@@ -31,12 +31,12 @@ namespace WebParking.Controllers
         }
 
         // GET: ParkingRecords
-        public async Task<IActionResult> Index(int? ParkingTypeId, bool? SearchForEntryDate, bool? SearchForDepatureDate, DateTime? EntryDate, DateTime? DepartureDate, int? OwnerId, int? CarId, string FieldName, string OldFieldName, SortState SortOrder, bool first = false, int page = 1)
+        public async Task<IActionResult> Index(int? ParkingTypeId, bool? SearchForEntryDate, bool? SearchForDepartureDate, DateTime? EntryDate, DateTime? DepartureDate, int? OwnerId, int? CarId, string FieldName, string OldFieldName, SortState SortOrder, bool first = false, int page = 1)
         {
             EntryDate = CookieProccesor.GetSetValue<DateTime>("EntryDate", EntryDate.HasValue ? EntryDate.Value.ToString() : "", first, Request, Response);
             DepartureDate = CookieProccesor.GetSetValue<DateTime>("DepatureDate", DepartureDate.HasValue ? DepartureDate.Value.ToString() : "", first, Request, Response);
             SearchForEntryDate = CookieProccesor.GetSetValue<bool>("SearchForEntryDate", SearchForEntryDate.ToString(), first, Request, Response);
-            SearchForDepatureDate = CookieProccesor.GetSetValue<bool>("SearchForDepatureDate", SearchForDepatureDate.ToString(), first, Request, Response);
+            SearchForDepartureDate = CookieProccesor.GetSetValue<bool>("SearchForDepatureDate", SearchForDepartureDate.ToString(), first, Request, Response);
             CarId = CookieProccesor.GetSetValue<int>("RecordCarId", CarId.HasValue ? CarId.Value.ToString() : "", first, Request, Response);
             OwnerId = CookieProccesor.GetSetValue<int>("RecordCarId", OwnerId.HasValue ? OwnerId.Value.ToString() : "", first, Request, Response);
             ParkingTypeId = CookieProccesor.GetSetValue<int>("RecordParkingTypeId", ParkingTypeId.HasValue ? ParkingTypeId.Value.ToString() : "", first, Request, Response);
@@ -46,7 +46,10 @@ namespace WebParking.Controllers
             if (viewModel != null && viewModel.CarId == CarId && viewModel.OwnerId == OwnerId &&
                 viewModel.SearchForDepatureDate == viewModel.SearchForDepatureDate &&
                 viewModel.SearchForEntryDate == viewModel.SearchForEntryDate &&
-                viewModel.DepartureDate == DepartureDate && viewModel.EntryDate == EntryDate &&
+                (SearchForEntryDate.Value ? (viewModel.EntryDate.GetValueOrDefault().Date == EntryDate.GetValueOrDefault().Date 
+                                            && viewModel.SearchForEntryDate == SearchForEntryDate) : true) &&
+                (SearchForDepartureDate.Value ? (viewModel.DepartureDate.GetValueOrDefault().Date == DepartureDate.GetValueOrDefault().Date
+                                                && viewModel.SearchForDepatureDate == SearchForDepartureDate) : true) &&
                 viewModel.PageViewModel.PageNumber == page &&
                 viewModel.ParkingTypeId == ParkingTypeId.Value &&
                 ViewModelComparsion.Compare(viewModel.SortViewModel, SortOrder, FieldName))
@@ -61,7 +64,7 @@ namespace WebParking.Controllers
                                                         Include(p => p.PaymentTariffId.ParkingType).
                                                         Include(p => p.Employee);
 
-            var context = Search(parkingContext, SearchForEntryDate ?? false, SearchForDepatureDate ?? false, EntryDate, DepartureDate,
+            var context = Search(parkingContext, SearchForEntryDate ?? false, SearchForDepartureDate ?? false, EntryDate, DepartureDate,
                                  CarId ?? 0, OwnerId ?? 0, ParkingTypeId ?? 0);
 
             var count = context.Count();
@@ -80,7 +83,7 @@ namespace WebParking.Controllers
             viewModel = new ParkingRecordsViewModel()
             {
                 ParkingRecords = list,
-                SearchForDepatureDate = SearchForDepatureDate ?? false,
+                SearchForDepatureDate = SearchForDepartureDate ?? false,
                 SearchForEntryDate = SearchForEntryDate ?? false,
                 EntryDate = EntryDate == default(DateTime) ? DateTime.Now : EntryDate,
                 DepartureDate = DepartureDate == default(DateTime) ? DateTime.Now : DepartureDate,

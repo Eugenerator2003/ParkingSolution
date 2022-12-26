@@ -93,6 +93,7 @@ namespace WebParking.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Display(Name = "Confirm password")]
             [Required(ErrorMessage = "Password confirmation not specified")]
             [DataType(DataType.Password)]
             [StringLength(100, ErrorMessage = "Field {0} must contain minimum {2} and maximum chars {1} символов.", MinimumLength = 6)]
