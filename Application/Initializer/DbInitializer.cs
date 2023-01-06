@@ -174,7 +174,7 @@ namespace WebParking.Initializer
 
             var marksCount = 100;
             var ownersCount = 56;
-            var carsCount = 1000;
+            var carsCount = 10;
             var employeesCount = 30;
             var typesCount = 2;
             var tariffsCount = 3;

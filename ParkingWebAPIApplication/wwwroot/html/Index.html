@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/Style.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/DataProviding.js"></script>
+    <script type="text/javascript" src="../js/markup.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+        </div>
+    </header>
+    <div class="container">
+        <a href="create.html" class="btn btn-primary">Create car</a>
+        <h2>Cars</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Mark</th>
+                    <th>Owner</th>
+                    <th>Number</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>s
+    <footer class="footer">
+        <div class="container">
+        </div>
+    </footer>
+    <script>
+    window.onload = function () {
+            GetAllCars();
+        }</script>
+</body>
+</html>

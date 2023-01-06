@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApplication", "WebApplic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebParking", "Application\WebParking.csproj", "{6B210448-CFCB-4809-9AEB-1C6A27764CDE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAPIApplication", "WebAPIApplication", "{F8EB54B0-5DBB-406B-B3DC-502FD3AFAB1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingWebAPIApplication", "ParkingWebAPIApplication\ParkingWebAPIApplication.csproj", "{4650F245-B388-4D10-B50E-6AA98CF09C1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,10 @@ Global
 		{6B210448-CFCB-4809-9AEB-1C6A27764CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B210448-CFCB-4809-9AEB-1C6A27764CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B210448-CFCB-4809-9AEB-1C6A27764CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4650F245-B388-4D10-B50E-6AA98CF09C1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4650F245-B388-4D10-B50E-6AA98CF09C1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4650F245-B388-4D10-B50E-6AA98CF09C1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4650F245-B388-4D10-B50E-6AA98CF09C1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +47,7 @@ Global
 		{110B5B19-5F9E-4DF8-B369-4D3E25DA7AC8} = {23AF1EEE-2655-4CA3-B354-379B518FE5DF}
 		{1831E80B-B283-4186-8EE2-C1A1A315F6AE} = {23AF1EEE-2655-4CA3-B354-379B518FE5DF}
 		{6B210448-CFCB-4809-9AEB-1C6A27764CDE} = {1D4B58BC-F5F4-4FA6-A5C2-112CAA3C1701}
+		{4650F245-B388-4D10-B50E-6AA98CF09C1C} = {F8EB54B0-5DBB-406B-B3DC-502FD3AFAB1F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26F21669-553E-4B0C-A4E0-EA195F8FF0A0}
